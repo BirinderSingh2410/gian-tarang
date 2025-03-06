@@ -1,13 +1,20 @@
+"use client";
 import { AppSidebar } from "../components/elements/AppSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import "./globals.css";
 import { Header } from "@/components/elements/Header";
+// import { useEffect, useState } from "react";
+// import Image from "next/image";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // const [gif, setGif] = useState(false);
+  // useEffect(() => {
+  //   setTimeout(() => setGif(true), 1000);
+  // }, []);
   return (
     <html lang="en">
       <head>

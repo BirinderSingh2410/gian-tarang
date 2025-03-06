@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -16,15 +17,16 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-const chartData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 190, fill: "var(--color-other)" },
+import { LablesData, PieChartData } from "@/types/Dashboard/charts";
+const chartData: Array<PieChartData> = [
+  { label: "chrome", count: 275, fill: "var(--color-chrome)" },
+  { label: "safari", count: 200, fill: "var(--color-safari)" },
+  { label: "firefox", count: 287, fill: "var(--color-firefox)" },
+  { label: "edge", count: 173, fill: "var(--color-edge)" },
+  { label: "other", count: 190, fill: "var(--color-other)" },
 ];
 
-const chartConfig = {
+const chartConfig: {[key: string]: LablesData} = {
   visitors: {
     label: "Visitors",
   },
@@ -52,7 +54,7 @@ const chartConfig = {
 
 export function CustomPieChart({ className = "" , title="" , description= "", chartLabel=""}) {
   const totalVisitors = React.useMemo(() => {
-    return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
+    return chartData.reduce((acc, curr) => acc + curr.count, 0);
   }, []);
 
   return (
@@ -74,8 +76,8 @@ export function CustomPieChart({ className = "" , title="" , description= "", ch
               />
               <Pie
                 data={chartData}
-                dataKey="visitors"
-                nameKey="browser"
+                dataKey="count"
+                nameKey="label"
                 innerRadius={60}
                 strokeWidth={5}
               >
@@ -112,6 +114,11 @@ export function CustomPieChart({ className = "" , title="" , description= "", ch
             </PieChart>
           </ChartContainer>
         </CardContent>
+        <CardFooter className="flex-col gap-2 text-sm">
+        <div className="flex items-center gap-2 font-medium leading-none">
+          Total employees with respective to profession 
+        </div>
+      </CardFooter>
       </Card>
     </div>
   );

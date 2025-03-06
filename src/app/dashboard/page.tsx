@@ -14,7 +14,6 @@ const page = () => {
     new Date(2025, 0, 11),
   ];
   const grantedDays = [new Date(2025, 0, 26)];
-  const date = new Date();
 
   return (
     <div className="flex flex-wrap-reverse justify-evenly">
@@ -55,6 +54,7 @@ const page = () => {
                 publicHolidays: "public-calender",
                 grantedHolidays: "granted-holdiays",
               }}
+              showOutsideDays={false}
               disabled={true}
             />
             <div className="flex-col ml-4" style={{alignContent: "center"}}>
