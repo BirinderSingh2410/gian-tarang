@@ -8,8 +8,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import { Calendar, Home, Search, Settings, Presentation } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const items = [
   {
@@ -18,9 +19,9 @@ const items = [
     icon: Home,
   },
   {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
+    title: "Attendance",
+    url: "attendance",
+    icon: Presentation,
   },
   {
     title: "Calendar",
@@ -45,20 +46,22 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="mt-[50px]">
-            <Image
-              src="assets/Logo.png"
-              width={400}
-              height={400}
-              alt="Logo of the school"
-            />
+            <Link href="/dashboard">
+              <Image
+                src="assets/Logo.png"
+                width={400}
+                height={400}
+                alt="Logo of the school"
+              />
+            </Link>
           </SidebarGroupLabel>
           <SidebarGroupContent className="mt-[70px]">
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem className="mt-2 p-1" key={item.title}>
-                  <SidebarMenuButton className='[&>svg]:size-6' asChild>
+                  <SidebarMenuButton className="[&>svg]:size-6" asChild>
                     <a href={item.url}>
-                      <item.icon width={20} height={20}/>
+                      <item.icon width={20} height={20} />
                       <span className="text-xl">{item.title}</span>
                     </a>
                   </SidebarMenuButton>
