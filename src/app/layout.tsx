@@ -1,22 +1,40 @@
+"use client";
 import { AppSidebar } from "../components/elements/AppSidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import "./globals.css";
+import { Header } from "@/components/elements/Header";
+// import { useEffect, useState } from "react";
+// import Image from "next/image";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // const [gif, setGif] = useState(false);
+  // useEffect(() => {
+  //   setTimeout(() => setGif(true), 1000);
+  // }, []);
   return (
     <html lang="en">
-      <body>
+      <head>
+        <meta
+          name="viewport"
+          content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </head>
+      <body className="pt-safe">
+        <header className="pt-safe"></header>
         <SidebarProvider>
           <AppSidebar />
-          <main>
-            <SidebarTrigger />
-            {children}
+          <main className="px-safe" style={{ width: "100%" }}>
+            <div className="justify-self-center" style={{ width: "95%" }}>
+              <Header />
+              <div style={{ width: "100%" }}>{children}</div>
+            </div>
           </main>
         </SidebarProvider>
+        <footer className="pb-safe"></footer>
       </body>
     </html>
   );
