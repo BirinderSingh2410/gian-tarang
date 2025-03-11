@@ -15,7 +15,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { ChartData, LablesData } from "@/types/Dashboard/charts";
+import { ChartData, ChartPropsInterface, LablesData } from "@/types/charts";
 const chartData: Array<ChartData> = [
   { month: "January", branch1: 186, branch2: 80, branch3: 100 },
   { month: "February", branch1: 305, branch2: 200, branch3: 120 },
@@ -44,7 +44,7 @@ export function MultiLineChart({
   className = "",
   title = "",
   description = "",
-}) {
+}: ChartPropsInterface) {
   return (
     <Card className={className}>
       <CardHeader>

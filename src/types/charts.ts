@@ -20,3 +20,13 @@ export interface EventsData {
     description: string,
     eventIcon: ElementType
 }
+export interface ChartPropsInterface {
+    className: string,
+    title: string,
+    description : string
+  }
+export interface AttendanceChartData {
+    day: string,
+    present: number,
+    absent: number
+}

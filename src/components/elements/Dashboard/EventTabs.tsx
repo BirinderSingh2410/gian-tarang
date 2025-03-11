@@ -14,7 +14,7 @@ import {
 import { Avatar } from "@/components/ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { EventsData } from "@/types/Dashboard/charts";
+import { EventsData } from "@/types/charts";
 
 function EventLabels({ Logo = Avatar, title = "", description = "" }) {
   return (

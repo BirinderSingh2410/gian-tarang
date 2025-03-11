@@ -17,7 +17,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { LablesData, PieChartData } from "@/types/Dashboard/charts";
+import { ChartPropsInterface, LablesData, PieChartData } from "@/types/charts";
 const chartData: Array<PieChartData> = [
   { label: "chrome", count: 275, fill: "var(--color-chrome)" },
   { label: "safari", count: 200, fill: "var(--color-safari)" },
@@ -52,7 +52,10 @@ const chartConfig: {[key: string]: LablesData} = {
   },
 } satisfies ChartConfig;
 
-export function CustomPieChart({ className = "" , title="" , description= "", chartLabel=""}) {
+interface ChartInterface extends ChartPropsInterface{
+  chartLabel: string
+}
+export function CustomPieChart({ className = "" , title="" , description= "", chartLabel=""}: ChartInterface) {
   const totalVisitors = React.useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.count, 0);
   }, []);
