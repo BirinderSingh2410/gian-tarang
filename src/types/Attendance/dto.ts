@@ -11,3 +11,11 @@ export interface TableInfoData {
     totalPresent: number,
     totalAbsent: number
 }
+
+
+export interface LiveAttendanceData {
+    yesterdaty: string,
+    status: string,
+    name: string,
+    rollno: number
+}
