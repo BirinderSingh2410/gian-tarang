@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -9,9 +8,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { LiveAttendanceData } from "@/types/Attendance/dto";
+import { LiveAttendanceData, TableHeaders } from "@/types/Attendance/dto";
 import { ChevronLeft, ChevronRight, Pencil } from "lucide-react";
 import { useEffect, useState } from "react";
+import { TableComp } from "../TableComp";
+import { getKeys } from "@/types/helper";
+import { Badge } from "@/components/ui/badge";
 
 interface AttendaceModal {
   open: boolean;
@@ -98,6 +100,29 @@ const attendanceData: LiveAttendanceData[] = [
     status: "",
   },
 ];
+
+const tableHeader: TableHeaders[] = [
+  {
+    data: "Name",
+    width: "",
+  },
+  {
+    data: "RollNo.",
+    width: "",
+  },
+  {
+    data: "Yesterday",
+    width: "",
+  },
+  {
+    data: "Status",
+    width: "",
+  },
+  {
+    data: "Edit",
+    width: "",
+  },
+];
 export function AttendanceModal({ open, setOpen }: AttendaceModal) {
   const [data, setData] = useState<LiveAttendanceData[]>([]);
   const [currentData, setCurrentData] = useState<LiveAttendanceData>();
@@ -124,9 +149,13 @@ export function AttendanceModal({ open, setOpen }: AttendaceModal) {
     setCurrentIndex(currentIndex - 1);
   };
 
+  const editAttendance = (index: number) => {
+    console.log(index, data[index]);
+  };
+
   return (
     <Dialog open={open} onOpenChange={(isOpen) => isOpen && setOpen(true)}>
-      <DialogContent className="sm:max-w-50">
+      <DialogContent className="sm:max-w-50 h-fit">
         <DialogHeader>
           <DialogTitle>Attendance</DialogTitle>
           <DialogDescription>Attendance Under process.</DialogDescription>
@@ -134,12 +163,8 @@ export function AttendanceModal({ open, setOpen }: AttendaceModal) {
         {!submitModal ? (
           <div className="flex-col justify-center">
             <div className="flex justify-evenly">
-              <Card className="p-2 text-sm bg-gray-400">
-                Yesterday: {currentData?.yesterdaty}
-              </Card>
-              <Card className="p-2 text-sm bg-gray-400">
-                Status: {currentData?.status}
-              </Card>
+              <Badge>Yesterday: {currentData?.yesterdaty}</Badge>
+              <Badge>Status: {currentData?.status}</Badge>
             </div>
             <div className="text-center mb-20 mt-20 flex justify-evenly">
               <Button
@@ -186,23 +211,16 @@ export function AttendanceModal({ open, setOpen }: AttendaceModal) {
             </div>
           </div>
         ) : (
-          <div className="flex-col justify-center">
-            <div className="flex justify-evenly">
-              <p>RollNo.</p>
-              <p>Name</p>
-              <p>Status</p>
-              <p>Edit</p>
-            </div>
-            {data.map((info, ind) => (
-              <div className="flex justify-evenly" key={ind}>
-                <p>{info.rollno}</p>
-                <p>{info.name}</p>
-                <p>{info.status}</p>
-                <Button variant="ghost" size="icon">
-                  <Pencil />
-                </Button>
-              </div>
-            ))}
+          <div className="h-[350px] overflow-y-scroll">
+            <Badge>Total students: {attendanceData.length}</Badge>
+            <TableComp
+              caption="Click on Save to save the details"
+              rows={data}
+              headers={tableHeader}
+              keys={getKeys(data[0])}
+              buttonFn={editAttendance}
+              ButtonIcon={Pencil}
+            />
           </div>
         )}
         <DialogFooter className="flex justify-evenly">

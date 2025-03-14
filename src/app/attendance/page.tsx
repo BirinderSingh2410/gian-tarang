@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { TableComp } from "@/components/elements/TableComp";
 import { TableHeaders, TableInfoData } from "@/types/Attendance/dto";
 import { AttendanceModal } from "@/components/elements/Attendance/AttendanceModal";
+import { getKeys } from "@/types/helper";
 
 const Attendance = () => {
   const tableHeader: TableHeaders[] = [
@@ -103,6 +104,7 @@ const Attendance = () => {
       name: "test1",
     },
   ];
+
   const [selectedOption, setSelectedOption] = useState<string>("");
   const [attendanceInfo, setAttendenceInfo] = useState<TableInfoData[]>([]);
   const [attendanceModal, setAttendanceModal] = useState(false);
@@ -133,16 +135,16 @@ const Attendance = () => {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="flex justify-evenly text-2xl text-center">
-            <Card className="text-green-700 p-10">
+          <div className="flex justify-evenly text-2xl text-center flex-wrap">
+            <Card className="text-green-700 p-10 mt-2">
               <p>Total Present</p>
               <p>20</p>
             </Card>
-            <Card className="text-red-500 p-10">
+            <Card className="text-red-500 p-10 mt-2">
               <p>Total Absent</p>
               <p>10</p>
             </Card>
-            <Card className="p-10">
+            <Card className="p-10 mt-2">
               <p>Overall Remarks</p>
               <p>Good/ Excellent/ Bad</p>
             </Card>
@@ -154,6 +156,7 @@ const Attendance = () => {
         caption="Attendance Info for three days"
         rows={attendanceInfo}
         headers={tableHeader}
+        keys={getKeys(attendanceInfo[0])}
       />
       {attendanceModal ? <AttendanceModal open = {attendanceModal} setOpen = {setAttendanceModal}/> : null}
     </div>

@@ -8,16 +8,30 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { TableHeaders, TableInfoData } from "@/types/Attendance/dto";
-import { PaginationComp } from "./PaginationComp";
+import { TableHeaders } from "@/types/Attendance/dto";
+import { ElementType, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+// import { PaginationComp } from "./PaginationComp";
 
 interface TableInterface {
-  rows: TableInfoData[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  rows: any[];
   headers: TableHeaders[];
   caption: string;
+  keys: string[];
+  ButtonIcon?: ElementType;
+  buttonFn?: (index: number) => void;
 }
 
-export function TableComp({ rows, headers, caption }: TableInterface) {
+export function TableComp({
+  rows,
+  headers,
+  caption,
+  keys,
+  ButtonIcon,
+  buttonFn,
+}: TableInterface) {
+  useEffect(() => console.log(keys));
   return (
     <Table className="mt-6">
       <TableCaption>{caption}</TableCaption>
@@ -36,18 +50,22 @@ export function TableComp({ rows, headers, caption }: TableInterface) {
       <TableBody>
         {rows.map((row, index) => (
           <TableRow key={index}>
-            <TableCell className="font-medium">{row.name}</TableCell>
-            <TableCell>{row.first}</TableCell>
-            <TableCell>{row.second}</TableCell>
-            <TableCell>{row.third}</TableCell>
-            <TableCell>{row.totalPresent}</TableCell>
-            <TableCell>{row.totalAbsent}</TableCell>
+            {keys.map((key, ind) => (
+              <TableCell key={ind}>{row[key]}</TableCell>
+            ))}
+            {ButtonIcon ? (
+              <TableCell>
+                <Button
+                  onClick={buttonFn ? () => buttonFn(index) : () => undefined}
+                >
+                  <ButtonIcon />
+                </Button>
+              </TableCell>
+            ) : null}
           </TableRow>
         ))}
       </TableBody>
-      <TableFooter>
-        <PaginationComp />
-      </TableFooter>
+      <TableFooter>{/* <PaginationComp /> */}</TableFooter>
     </Table>
   );
 }
