@@ -15,7 +15,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import { LablesData, PieChartData } from "@/types/Dashboard/charts"
+import { ChartPropsInterface, LablesData, PieChartData } from "@/types/charts"
 
 const chartData: Array<PieChartData> = [
   { label: "chrome", count: 275, fill: "var(--color-chrome)" },
@@ -51,7 +51,7 @@ const chartConfig:{[key: string]: LablesData} = {
   },
 } satisfies ChartConfig
 
-export function LeveledBarGraph({className = "", title="" , description= ""}) {
+export function LeveledBarGraph({className = "", title="" , description= ""}: ChartPropsInterface) {
   return (
     <Card className={className}>
       <CardHeader>

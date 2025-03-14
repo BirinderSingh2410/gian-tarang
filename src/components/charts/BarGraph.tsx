@@ -16,6 +16,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+import { ChartPropsInterface } from "@/types/charts"
 const chartData = [
   { month: "January", desktop: 186 },
   { month: "February", desktop: 305 },
@@ -32,7 +33,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function BarGraph({className="", title="" , description= ""}) {
+export function BarGraph({className="", title="" , description= ""}: ChartPropsInterface) {
   return (
     <Card className={className}>
       <CardHeader>
