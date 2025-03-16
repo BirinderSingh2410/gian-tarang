@@ -8,7 +8,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Calendar, Home, Search, Settings, Presentation } from "lucide-react";
+import { BookUser, Home, Search, Settings, Presentation } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -24,9 +24,9 @@ const items = [
     icon: Presentation,
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
+    title: "Organization",
+    url: "organization",
+    icon: BookUser,
   },
   {
     title: "Search",

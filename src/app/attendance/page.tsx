@@ -9,6 +9,7 @@ import { TableComp } from "@/components/elements/TableComp";
 import { TableHeaders, TableInfoData } from "@/types/Attendance/dto";
 import { AttendanceModal } from "@/components/elements/Attendance/AttendanceModal";
 import { getKeys } from "@/types/helper";
+import CardStats from "@/components/elements/CardStats";
 
 const Attendance = () => {
   const tableHeader: TableHeaders[] = [
@@ -135,20 +136,11 @@ const Attendance = () => {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="flex justify-evenly text-2xl text-center flex-wrap">
-            <Card className="text-green-700 p-10 mt-2">
-              <p>Total Present</p>
-              <p>20</p>
-            </Card>
-            <Card className="text-red-500 p-10 mt-2">
-              <p>Total Absent</p>
-              <p>10</p>
-            </Card>
-            <Card className="p-10 mt-2">
-              <p>Overall Remarks</p>
-              <p>Good/ Excellent/ Bad</p>
-            </Card>
-          </div>
+          <Card className="flex justify-evenly text-2xl text-center flex-wrap p-6">
+            <CardStats title="Total Present" value={20} color="text-green-700"/>
+            <CardStats title="Total Absent" value={10} color="text-red-500"/>
+            <CardStats title="Overall Remarks" value={"Good"}/>
+          </Card>
         </CardContent>
       </Card>
       <MultipleChartData />
