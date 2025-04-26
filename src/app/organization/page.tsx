@@ -8,7 +8,7 @@ import { SelectComp } from "@/components/elements/SelectComp";
 
 const Organization = () => {
   const [selectedOption, setSelectedOption] = useState<string>("");
-  const [data, setData] = useState<string[]>(["Class 1", "Class 3", "Class 6", "+2"])
+  const [data] = useState<string[]>(["Class 1", "Class 3", "Class 6", "+2"])
 
   return (
     <Tabs defaultValue="employess">

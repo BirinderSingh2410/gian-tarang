@@ -15,8 +15,25 @@ import { Avatar } from "@/components/ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { EventsData } from "@/types/charts";
+import { ElementType } from "react";
 
-function EventLabels({ Logo = Avatar, title = "", description = "" }) {
+interface CardContents {
+  Icon: ElementType;
+  title: string;
+  eventData: Array<EventsData>;
+}
+
+interface EventLablesInterface {
+  Logo: ElementType;
+  title: string;
+  description: string;
+}
+
+function EventLabels({
+  Logo = Avatar,
+  title = "",
+  description = "",
+}: EventLablesInterface) {
   return (
     <div className="flex mb-2 items-center mt-2">
       {Logo && Logo === Avatar ? (
@@ -34,7 +51,11 @@ function EventLabels({ Logo = Avatar, title = "", description = "" }) {
   );
 }
 
-function CardContents({ Icon = Bell, title = "", eventData = [] }) {
+function CardContents({
+  Icon = Bell,
+  title = "",
+  eventData = [],
+}: CardContents) {
   return (
     <Card>
       <CardHeader>
@@ -46,7 +67,6 @@ function CardContents({ Icon = Bell, title = "", eventData = [] }) {
       <CardContent className="space-y-2">
         <ScrollArea className="h-[400px] w-100">
           {eventData.map((data: EventsData, index) => (
-            // eslint-disable-next-line react/jsx-key
             <div key={index}>
               <EventLabels
                 Logo={data.eventIcon}
@@ -130,12 +150,12 @@ export function EventTabs({ className = "" }) {
     <Tabs defaultValue="events" className={className}>
       <TabsList className="grid w-full grid-cols-4">
         <TabsTrigger value="events">Events</TabsTrigger>
-        <TabsTrigger value="birthday">Birthday's</TabsTrigger>
+        <TabsTrigger value="birthday">{`Birthday's`}</TabsTrigger>
         <TabsTrigger value="work">Work Anniversay</TabsTrigger>
-        <TabsTrigger value="leave">Leave's</TabsTrigger>
+        <TabsTrigger value="leave">{`Leave's`}</TabsTrigger>
       </TabsList>
       <TabsContent value="events">
-        <CardContents title="Events" Icon={Bell} eventData={eventsData} />
+        <CardContents title="Events" Icon={Bell} eventData={eventsData || []} />
       </TabsContent>
       <TabsContent value="birthday" className="min-h-[220px]">
         <CardContents

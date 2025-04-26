@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { MultipleChartData } from "@/components/charts/MultipleBarGraph";
 import React, { useEffect, useState } from "react";
