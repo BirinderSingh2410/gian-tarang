@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { TableHeaders } from "@/types/Attendance/dto";
-import { ElementType, useEffect } from "react";
+import { ElementType } from "react";
 import { Button } from "@/components/ui/button";
 // import { PaginationComp } from "./PaginationComp";
 
@@ -31,7 +31,6 @@ export function TableComp({
   ButtonIcon,
   buttonFn,
 }: TableInterface) {
-  useEffect(() => console.log(keys));
   return (
     <Table className="mt-6">
       <TableCaption>{caption}</TableCaption>

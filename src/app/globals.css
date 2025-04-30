@@ -153,3 +153,10 @@ body {
   height: 20px;
   opacity: 0.5;
 }
+.orgchart-container{
+  height: fit-content !important;
+  border: none !important;
+}
+.orgchart{
+  background: none !important;
+}
