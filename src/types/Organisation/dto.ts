@@ -1,3 +1,5 @@
+import { ElementType } from "react"
+
 export interface FilterData {
     departmentData: string[],
     filterHeading: string,
@@ -15,4 +17,22 @@ export interface DetailsInfo {
 export interface CardDetailsInfo {
     detailsData : DetailsInfo[],
     type: string
+}
+
+export interface IndividualDetailsInfo {
+    logo: ElementType,
+    category: string,
+    data: string
+}
+
+export interface AttendanceTableData {
+    date: string,
+    reasonType: string,
+    reason: string
+}
+
+export interface MarksTableData {
+    subject: string,
+    term?:number,
+    exams: {[key:string]:number}
 }

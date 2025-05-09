@@ -11,6 +11,7 @@ import {
 import { BookUser, Home, Search, Settings, Presentation } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import Logo from '@/assets/Logo.png'
 
 const items = [
   {
@@ -48,7 +49,7 @@ export function AppSidebar() {
           <SidebarGroupLabel className="mt-[50px]">
             <Link href="/dashboard">
               <Image
-                src="assets/Logo.png"
+                src={Logo}
                 width={400}
                 height={400}
                 alt="Logo of the school"
@@ -60,7 +61,7 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem className="mt-2 p-1" key={item.title}>
                   <SidebarMenuButton className="[&>svg]:size-6" asChild>
-                    <a href={item.url}>
+                    <a href={'/' + item.url}>
                       <item.icon width={20} height={20} />
                       <span className="text-xl">{item.title}</span>
                     </a>
