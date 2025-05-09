@@ -36,8 +36,8 @@ const IndividualsDetail = ({
               <Link
                 href={
                   type == "students"
-                    ? `/students?id=${data.id}`
-                    : `/employees?id=${data.id}`
+                    ? `organization/students/${data.id}`
+                    : `organization/employees/${data.id}`
                 }
               >
                 <Button>View Details</Button>

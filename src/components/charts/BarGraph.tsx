@@ -16,24 +16,16 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import { ChartPropsInterface } from "@/types/charts"
-const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
-]
 
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "hsl(var(--chart-1))",
-  },
-} satisfies ChartConfig
-
-export function BarGraph({className="", title="" , description= ""}: ChartPropsInterface) {
+interface BarGraphInfo {
+  className: string,
+  barData: Array<unknown>,
+  chartConfig: ChartConfig,
+  title: string,
+  description: string,
+  dataKey: string
+}
+export function BarGraph({className= "" ,barData=[], chartConfig={}, title="" , description= "", dataKey = ''}:BarGraphInfo) {
   return (
     <Card className={className}>
       <CardHeader>
@@ -44,7 +36,7 @@ export function BarGraph({className="", title="" , description= ""}: ChartPropsI
         <ChartContainer config={chartConfig}>
           <BarChart
             accessibilityLayer
-            data={chartData}
+            data={barData}
             margin={{
               top: 20,
             }}
@@ -61,7 +53,7 @@ export function BarGraph({className="", title="" , description= ""}: ChartPropsI
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8}>
+            <Bar dataKey={dataKey} fill={`var(--color-${dataKey})`} radius={8}>
               <LabelList
                 position="top"
                 offset={12}
@@ -73,9 +65,6 @@ export function BarGraph({className="", title="" , description= ""}: ChartPropsI
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
-        <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 days
-        </div>
       </CardFooter>
     </Card>
   )

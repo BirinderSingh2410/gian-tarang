@@ -162,11 +162,11 @@ export function AttendanceModal({ open, setOpen }: AttendaceModal) {
         </DialogHeader>
         {!submitModal ? (
           <div className="flex-col justify-center">
-            <div className="flex justify-evenly">
+                          <div className="flex justify-evenly">
               <Badge>Yesterday: {currentData?.yesterdaty}</Badge>
               <Badge>Status: {currentData?.status}</Badge>
-            </div>
-            <div className="text-center mb-20 mt-20 flex justify-evenly">
+                          </div>
+                          <div className="text-center mb-20 mt-20 flex justify-evenly">
               <Button
                 variant="outline"
                 disabled={currentIndex > 0 ? false : true}
@@ -175,10 +175,10 @@ export function AttendanceModal({ open, setOpen }: AttendaceModal) {
               >
                 <ChevronLeft />
               </Button>
-              <div className="flex flex-col">
+                            <div className="flex flex-col">
                 <Label className="text-4xl">{currentData?.name}</Label>
                 <Label>Roll No: {currentData?.rollno}</Label>
-              </div>
+                            </div>
               <Button
                 variant="outline"
                 size="icon"
@@ -187,28 +187,28 @@ export function AttendanceModal({ open, setOpen }: AttendaceModal) {
               >
                 <ChevronRight />
               </Button>
-            </div>
-            <div className="flex justify-evenly">
-              <Button
-                variant="secondary"
-                className="hover:bg-green-700 text-lg"
-                onClick={() => updateAttendanceInfo("present")}
-              >
-                Present
-              </Button>
-              <Button
-                variant="destructive"
-                onClick={() => updateAttendanceInfo("absent")}
-              >
-                Absent
-              </Button>
-              <Button
-                variant="outline"
-                onClick={() => updateAttendanceInfo("leave")}
-              >
-                On Leave
-              </Button>
-            </div>
+                          </div>
+                          <div className="flex justify-evenly">
+                            <Button
+                              variant="secondary"
+                              className="hover:bg-green-700 text-lg"
+                              onClick={() => updateAttendanceInfo("present")}
+                            >
+                              Present
+                            </Button>
+                            <Button
+                              variant="destructive"
+                              onClick={() => updateAttendanceInfo("absent")}
+                            >
+                              Absent
+                            </Button>
+                            <Button
+                              variant="outline"
+                              onClick={() => updateAttendanceInfo("leave")}
+                            >
+                              On Leave
+                            </Button>
+                          </div>
           </div>
         ) : (
           <div className="h-[350px] overflow-y-scroll">
