@@ -8,7 +8,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { BookUser, Home, Search, Settings, Presentation } from "lucide-react";
+import { BookUser, Home, Settings, Presentation, BookOpenCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from '@/assets/Logo.png'
@@ -30,9 +30,9 @@ const items = [
     icon: BookUser,
   },
   {
-    title: "Search",
-    url: "#",
-    icon: Search,
+    title: "Test Marks",
+    url: "tests",
+    icon: BookOpenCheck,
   },
   {
     title: "Settings",
