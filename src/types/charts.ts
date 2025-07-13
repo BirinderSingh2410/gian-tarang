@@ -30,3 +30,9 @@ export interface SingleLineChart {
     month: string,
     desktop: number
 }
+
+export interface ChartPropsInterface{
+    className: string,
+    title: string,
+    description: string
+}

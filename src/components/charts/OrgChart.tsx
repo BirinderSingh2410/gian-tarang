@@ -2,7 +2,21 @@
 import React from "react";
 import OrganizationChart from "@dabeng/react-orgchart";
 
+
+interface OrgChartProps {
+    datasource: unknown;
+    chartClass?: string;
+    pan?: boolean;
+    zoom?: boolean;
+    draggable?: boolean;
+    collapsible?: boolean;
+    NodeTemplate?: React.FC<unknown>;
+    onClickNode?: (nodeData: unknown) => void;
+    onClickChart?: () => void;
+  }
+
 function OrgChart() {
+  const OrgChartComponent = OrganizationChart as unknown as React.FC<OrgChartProps>;
   const ds = {
     id: "1",
     name: "Lao Lao",
@@ -38,7 +52,7 @@ function OrgChart() {
   };
   return (
     <div className="mt-6">
-      <OrganizationChart datasource={ds} />
+      <OrgChartComponent datasource={ds} />
     </div>
   );
 }
