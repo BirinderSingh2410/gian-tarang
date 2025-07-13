@@ -60,7 +60,7 @@ function CardContents({
     <Card>
       <CardHeader>
         <CardTitle className="flex">
-          <Icon />
+          <Icon className="mr-2"/>
           {title}
         </CardTitle>
       </CardHeader>

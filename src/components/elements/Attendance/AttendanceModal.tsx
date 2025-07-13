@@ -154,7 +154,7 @@ export function AttendanceModal({ open, setOpen }: AttendaceModal) {
   };
 
   return (
-    <Dialog open={open} onOpenChange={(isOpen) => isOpen && setOpen(true)}>
+    <Dialog open={open} onOpenChange={(isOpen) => isOpen && setOpen(false)}>
       <DialogContent className="sm:max-w-50 h-fit">
         <DialogHeader>
           <DialogTitle>Attendance</DialogTitle>
