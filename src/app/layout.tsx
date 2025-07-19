@@ -1,20 +1,15 @@
 "use client";
-import { AppSidebar } from "../components/elements/AppSidebar";
-import { SidebarProvider } from "@/components/ui/sidebar";
+
+import AuthenticatedMain from "@/components/AuthenticatedMain";
 import "./globals.css";
-import { Header } from "@/components/elements/Header";
-// import { useEffect, useState } from "react";
-// import Image from "next/image";
+import { SessionProvider } from "next-auth/react";
+import { ToastContainer } from "react-toastify";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const [gif, setGif] = useState(false);
-  // useEffect(() => {
-  //   setTimeout(() => setGif(true), 1000);
-  // }, []);
   return (
     <html lang="en">
       <head>
@@ -24,17 +19,11 @@ export default function RootLayout({
         />
       </head>
       <body className="pt-safe">
-        <header className="pt-safe"></header>
-        <SidebarProvider>
-          <AppSidebar />
-          <main className="px-safe" style={{ width: "100%" }}>
-            <div className="justify-self-center" style={{ width: "95%" }}>
-              <Header />
-              <div style={{ width: "100%" }}>{children}</div>
-            </div>
-          </main>
-        </SidebarProvider>
-        <footer className="pb-safe"></footer>
+        <SessionProvider>
+          <AuthenticatedMain>{children}</AuthenticatedMain>
+          <footer className="pb-safe"></footer>
+          <ToastContainer />
+        </SessionProvider>
       </body>
     </html>
   );

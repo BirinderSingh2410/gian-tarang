@@ -8,30 +8,36 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { BookUser, Home, Settings, Presentation, BookOpenCheck } from "lucide-react";
+import {
+  BookUser,
+  Home,
+  Settings,
+  Presentation,
+  BookOpenCheck,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import Logo from '@/assets/Logo.png'
+import Logo from "@/assets/Logo.png";
 
 const items = [
   {
     title: "Home",
-    url: "dashboard",
+    url: "view/dashboard",
     icon: Home,
   },
   {
     title: "Attendance",
-    url: "attendance",
+    url: "view/attendance",
     icon: Presentation,
   },
   {
     title: "Organization",
-    url: "organization",
+    url: "view/organization",
     icon: BookUser,
   },
   {
     title: "Test Marks",
-    url: "tests",
+    url: "view/tests",
     icon: BookOpenCheck,
   },
   {
@@ -47,7 +53,7 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="mt-[50px]">
-            <Link href="/dashboard">
+            <Link href="view/dashboard">
               <Image
                 src={Logo}
                 width={400}
@@ -61,7 +67,7 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem className="mt-2 p-1" key={item.title}>
                   <SidebarMenuButton className="[&>svg]:size-6" asChild>
-                    <a href={'/' + item.url}>
+                    <a href={"/" + item.url}>
                       <item.icon width={20} height={20} />
                       <span className="text-xl">{item.title}</span>
                     </a>

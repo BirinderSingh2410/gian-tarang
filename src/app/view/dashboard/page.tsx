@@ -7,6 +7,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartConfig } from "@/components/ui/chart";
 import { LablesData, PieChartData } from "@/types/charts";
+// import { signOut } from "next-auth/react";
 import React from "react";
 
 const pieChartConfig: { [key: string]: LablesData } = {
