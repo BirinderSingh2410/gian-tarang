@@ -12,9 +12,24 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import showAlert from "./showAlert";
 
 export function Header() {
-  const {data} = useSession()
+  const { data } = useSession();
+  const router = useRouter();
+  const signingOut = async () => {
+    try {
+      await signOut({
+        redirect: false,
+        callbackUrl: "/",
+      });
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+      showAlert({ type: "error", message: "Something went wrong" });
+    }
+  };
   return (
     <Card
       className="mb-4 mt-2 h-20"
@@ -35,9 +50,7 @@ export function Header() {
               <Settings />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-30 mr-5">
-              <DropdownMenuItem onClick={() => signOut()}>
-                Logout
-              </DropdownMenuItem>
+              <DropdownMenuItem onClick={signingOut}>Logout</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Profile</DropdownMenuItem>
             </DropdownMenuContent>

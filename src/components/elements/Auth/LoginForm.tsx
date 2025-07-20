@@ -35,10 +35,13 @@ const LoginForm = () => {
       const result = await signIn("credentials", {
         ...form.getValues(),
         redirect: false,
-        callbackUrl: `${window.location.origin}/view/dashboard`,
+        callbackUrl: `/view/dashboard`,
       });
       if (result?.ok) {
-        router.push(result.url || "/view/dashboard");
+        const isExternal = result?.url?.startsWith("http");
+        router.push(
+          isExternal ? "/view/dashboard" : result?.url || "/view/dashboard"
+        );
       } else {
         showAlert({ type: "error", message: result?.error || "" });
       }
