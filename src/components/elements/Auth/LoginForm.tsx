@@ -18,9 +18,12 @@ import { signIn } from "next-auth/react";
 import { LoginSchema } from "@/lib/validation/Auth";
 import { useRouter } from "next/navigation";
 import showAlert from "../showAlert";
+import { useDispatch } from "react-redux";
+import { isLoader } from "@/redux/globalSlice";
 
 const LoginForm = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -32,6 +35,7 @@ const LoginForm = () => {
 
   const onSubmit = async () => {
     try {
+      dispatch(isLoader(true));
       const result = await signIn("credentials", {
         ...form.getValues(),
         redirect: false,
@@ -42,11 +46,14 @@ const LoginForm = () => {
         router.push(
           isExternal ? "/view/dashboard" : result?.url || "/view/dashboard"
         );
+        dispatch(isLoader(false));
       } else {
+        dispatch(isLoader(false));
         showAlert({ type: "error", message: result?.error || "" });
       }
     } catch (error) {
       console.log(error);
+      dispatch(isLoader(false));
       showAlert({ type: "error", message: "Something went wrong" });
     }
   };

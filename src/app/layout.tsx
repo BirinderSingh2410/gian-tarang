@@ -4,6 +4,9 @@ import AuthenticatedMain from "@/components/AuthenticatedMain";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { ToastContainer } from "react-toastify";
+import { Provider } from "react-redux";
+import { store } from "@/redux/store";
+import LoaderGif from "@/components/elements/LoaderGif";
 
 export default function RootLayout({
   children,
@@ -19,11 +22,14 @@ export default function RootLayout({
         />
       </head>
       <body className="pt-safe">
-        <SessionProvider>
-          <AuthenticatedMain>{children}</AuthenticatedMain>
-          <footer className="pb-safe"></footer>
-          <ToastContainer />
-        </SessionProvider>
+        <Provider store={store}>
+          <SessionProvider>
+            <LoaderGif />
+            <AuthenticatedMain>{children}</AuthenticatedMain>
+            <footer className="pb-safe"></footer>
+            <ToastContainer />
+          </SessionProvider>
+        </Provider>
       </body>
     </html>
   );

@@ -2,16 +2,23 @@ import { Header } from "@/components/elements/Header";
 import { AppSidebar } from "../components/elements/AppSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { useSession } from "next-auth/react";
-import LoaderGif from "./elements/LoaderGif";
+import { useDispatch } from "react-redux";
+import { isLoader } from "@/redux/globalSlice";
+import { useEffect } from "react";
 
 const AuthenticatedMain = ({ children }: { children: React.ReactNode }) => {
   const { data: session, status } = useSession();
-
-  if (status === "loading") {
-    return <LoaderGif />;
-  }
-
+  const dispatch = useDispatch();
   const isLoggedIn = !!session;
+
+  useEffect(() => {
+    console.log(status);
+    if (status === "loading") {
+      dispatch(isLoader(true));
+    } else {
+      dispatch(isLoader(false));
+    }
+  }, [status, dispatch, isLoggedIn]);
 
   return isLoggedIn ? (
     <div>

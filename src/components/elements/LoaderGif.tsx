@@ -1,18 +1,25 @@
 import React from "react";
-import WelcomeGifGref from "@/assets/welcome.gif";
+import LoaderGifSrc from "@/assets/loader.gif";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import { ReduxStateI } from "@/redux/reduxInterface";
 
 const LoaderGif = () => {
-  return (
-    <div className="flex justify-center items-center h-[100vh]">
+  const loader = useSelector((state: ReduxStateI) => state.dashboard.loader);
+
+  return loader ? (
+    <div className="fixed flex inset-0 justify-center items-center h-[100vh] bg-transparent">
+      <div className="inset-0 bg-black absolute w-[100%] h-[100%] opacity-80"></div>
       <Image
-        src={WelcomeGifGref}
+        className="relative z-10"
+        src={LoaderGifSrc}
         alt="Description of the image"
-        width={500}
+        width={300}
         height={300}
+        priority={true}
       />
     </div>
-  );
+  ) : null;
 };
 
 export default LoaderGif;

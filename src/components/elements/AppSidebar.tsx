@@ -67,10 +67,10 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem className="mt-2 p-1" key={item.title}>
                   <SidebarMenuButton className="[&>svg]:size-6" asChild>
-                    <a href={"/" + item.url}>
+                    <Link href={"/" + item.url}>
                       <item.icon width={20} height={20} />
                       <span className="text-xl">{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
