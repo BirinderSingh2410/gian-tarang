@@ -12,7 +12,6 @@ const AuthenticatedMain = ({ children }: { children: React.ReactNode }) => {
   const isLoggedIn = !!session;
 
   useEffect(() => {
-    console.log(status);
     if (status === "loading") {
       dispatch(isLoader(true));
     } else {

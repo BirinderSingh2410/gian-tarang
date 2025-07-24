@@ -24,7 +24,6 @@ import { isLoader } from "@/redux/globalSlice";
 const LoginForm = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {

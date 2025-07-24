@@ -25,7 +25,6 @@ import { SignupSchema } from "@/lib/validation/Auth";
 import showAlert from "../showAlert";
 
 const RegisterForm = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const form = useForm<z.infer<typeof SignupSchema>>({
     resolver: zodResolver(SignupSchema),
     defaultValues: {

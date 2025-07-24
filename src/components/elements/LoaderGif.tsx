@@ -8,8 +8,8 @@ const LoaderGif = () => {
   const loader = useSelector((state: ReduxStateI) => state.dashboard.loader);
 
   return loader ? (
-    <div className="fixed flex inset-0 justify-center items-center h-[100vh] bg-transparent">
-      <div className="inset-0 bg-black absolute w-[100%] h-[100%] opacity-80"></div>
+    <div className="fixed flex inset-0 justify-center items-center h-[100vh] bg-transparent z-[100]">
+      <div className="inset-0 bg-black absolute w-[100%] h-[100%] opacity-[0.88]"></div>
       <Image
         className="relative z-10"
         src={LoaderGifSrc}

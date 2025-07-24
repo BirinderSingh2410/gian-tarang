@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'gian-tarang',
   webDir: 'public',
   server: {
-    url: 'http://192.168.1.9:3000',
+    url: 'http://192.168.1.11:3000',
     cleartext: true
   }
 };

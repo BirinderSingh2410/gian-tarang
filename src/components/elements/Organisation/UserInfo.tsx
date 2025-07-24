@@ -133,6 +133,7 @@ const UserInfo = ({ report }: { report: string[] }) => {
     } else {
       notFound();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [report]);
   return (
     <div>

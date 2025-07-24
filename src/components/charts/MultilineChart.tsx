@@ -15,15 +15,18 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { ChartData, ChartPropsInterface, LablesData } from "@/types/charts";
-const chartData: Array<ChartData> = [
-  { month: "January", branch1: 186, branch2: 80, branch3: 100 },
-  { month: "February", branch1: 305, branch2: 200, branch3: 120 },
-  { month: "March", branch1: 237, branch2: 120, branch3: 80 },
-  { month: "April", branch1: 73, branch2: 190, branch3: 70 },
-  { month: "May", branch1: 209, branch2: 130, branch3: 190 },
-  { month: "June", branch1: 214, branch2: 140, branch3: 100 },
-];
+import {
+  ChartPropsInterface,
+  LablesData,
+} from "@/types/charts";
+// const chartData: Array<MultiLineChartData> = [
+//   { month: "January", branch1: 186, branch2: 80, branch3: 100 },
+//   { month: "February", branch1: 305, branch2: 200, branch3: 120 },
+//   { month: "March", branch1: 237, branch2: 120, branch3: 80 },
+//   { month: "April", branch1: 73, branch2: 190, branch3: 70 },
+//   { month: "May", branch1: 209, branch2: 130, branch3: 190 },
+//   { month: "June", branch1: 214, branch2: 140, branch3: 100 },
+// ];
 
 const chartConfig: { [key: string]: LablesData } = {
   branch1: {
@@ -44,6 +47,7 @@ export function MultiLineChart({
   className = "",
   title = "",
   description = "",
+  data = [],
 }: ChartPropsInterface) {
   return (
     <Card className={className}>
@@ -55,7 +59,7 @@ export function MultiLineChart({
         <ChartContainer config={chartConfig}>
           <AreaChart
             accessibilityLayer
-            data={chartData}
+            data={data}
             margin={{
               left: 12,
               right: 12,

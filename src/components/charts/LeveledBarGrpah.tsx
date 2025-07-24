@@ -1,57 +1,29 @@
-"use client"
-import { Bar, BarChart, XAxis, YAxis } from "recharts"
+"use client";
+import { Bar, BarChart, XAxis, YAxis } from "recharts";
 
 import {
   Card,
   CardContent,
   CardDescription,
-//   CardFooter,
+  //   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
-import { ChartPropsInterface, LablesData, PieChartData } from "@/types/charts"
+} from "@/components/ui/chart";
+import { ChartPropsInterface } from "@/types/charts";
 
-const chartData: Array<PieChartData> = [
-  { label: "chrome", count: 275, fill: "var(--color-chrome)" },
-  { label: "safari", count: 200, fill: "var(--color-safari)" },
-  { label: "firefox", count: 187, fill: "var(--color-firefox)" },
-  { label: "edge", count: 173, fill: "var(--color-edge)" },
-  { label: "other", count: 90, fill: "var(--color-other)" },
-]
 
-const chartConfig:{[key: string]: LablesData} = {
-  count: {
-    label: "count",
-  },
-  chrome: {
-    label: "Chrome",
-    color: "hsl(var(--chart-1))",
-  },
-  safari: {
-    label: "Safari",
-    color: "hsl(var(--chart-2))",
-  },
-  firefox: {
-    label: "Firefox",
-    color: "hsl(var(--chart-3))",
-  },
-  edge: {
-    label: "Edge",
-    color: "hsl(var(--chart-4))",
-  },
-  other: {
-    label: "Other",
-    color: "hsl(var(--chart-5))",
-  },
-} satisfies ChartConfig
-
-export function LeveledBarGraph({className = "", title="" , description= ""}: ChartPropsInterface) {
+export function LeveledBarGraph({
+  className = "",
+  title = "",
+  description = "",
+  data = [],
+  chartConfig = {}
+}: ChartPropsInterface) {
   return (
     <Card className={className}>
       <CardHeader>
@@ -62,7 +34,7 @@ export function LeveledBarGraph({className = "", title="" , description= ""}: Ch
         <ChartContainer config={chartConfig}>
           <BarChart
             accessibilityLayer
-            data={chartData}
+            data={data}
             layout="vertical"
             margin={{
               left: 0,
@@ -96,5 +68,5 @@ export function LeveledBarGraph({className = "", title="" , description= ""}: Ch
         </div>
       </CardFooter> */}
     </Card>
-  )
+  );
 }

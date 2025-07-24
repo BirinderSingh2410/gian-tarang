@@ -48,6 +48,7 @@ const items = [
 ];
 
 export function AppSidebar() {
+ 
   return (
     <Sidebar variant="floating">
       <SidebarContent>
