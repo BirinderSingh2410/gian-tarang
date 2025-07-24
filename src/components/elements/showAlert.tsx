@@ -3,6 +3,7 @@ import { Flip, toast, ToastOptions } from "react-toastify";
 interface alert {
   type: "error" | "success" | "info";
   message: string | "";
+  error?: unknown
 }
 
 const alertData: ToastOptions = {
@@ -17,7 +18,8 @@ const alertData: ToastOptions = {
   transition: Flip,
 };
 
-const showAlert = ({ type, message }: alert) => {
+const showAlert = ({ type, message, error }: alert) => {
+  console.log(error)
   if (type === "error") {
     toast.error(message, alertData);
   } else if (type == "success") {

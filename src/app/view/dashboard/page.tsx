@@ -1,57 +1,77 @@
 "use client";
+import { DashboardURL } from "@/app/urls";
 import { CustomPieChart } from "@/components/charts/CustomPieChart";
 import { LeveledBarGraph } from "@/components/charts/LeveledBarGrpah";
 import { MultiLineChart } from "@/components/charts/MultilineChart";
 import { EventTabs } from "@/components/elements/Dashboard/EventTabs";
+import showAlert from "@/components/elements/showAlert";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChartConfig } from "@/components/ui/chart";
-import { LablesData, PieChartData } from "@/types/charts";
-// import { signOut } from "next-auth/react";
-import React from "react";
+import ApiCall from "@/hooks/ApiCall";
+import { isLoader } from "@/redux/globalSlice";
 
-const pieChartConfig: { [key: string]: LablesData } = {
-  visitors: {
-    label: "Visitors",
-  },
-  chrome: {
-    label: "Chrome",
-    color: "hsl(var(--chart-1))",
-  },
-  safari: {
-    label: "Safari",
-    color: "hsl(var(--chart-2))",
-  },
-  firefox: {
-    label: "Firefox",
-    color: "hsl(var(--chart-3))",
-  },
-  edge: {
-    label: "Edge",
-    color: "hsl(var(--chart-4))",
-  },
-  other: {
-    label: "Other",
-    color: "hsl(var(--chart-5))",
-  },
-} satisfies ChartConfig;
+import {
+  HolidaysI,
+  OverallAttendanceI,
+  PeopleCountI,
+  RecentNotificationI,
+} from "@/types/Dashboard/dashboard";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
-const pieChartData: PieChartData[] = [
-  { label: "chrome", count: 275, fill: "var(--color-chrome)" },
-  { label: "safari", count: 200, fill: "var(--color-safari)" },
-  { label: "firefox", count: 287, fill: "var(--color-firefox)" },
-  { label: "edge", count: 173, fill: "var(--color-edge)" },
-  { label: "other", count: 190, fill: "var(--color-other)" },
-];
+interface ApiDataI {
+  attendanceBranch: OverallAttendanceI[];
+  holdiays: HolidaysI;
+  employees: PeopleCountI;
+  events: RecentNotificationI;
+  totalStudents: PeopleCountI;
+}
+const defaultAPIData = {
+  attendanceBranch: [],
+  employees: { chartData: [], chartConfig: {} },
+  events: {},
+  totalStudents: {
+    chartData: [],
+    chartConfig: {},
+  },
+  holdiays: { mainHoliday: [], grantedDays: [] },
+};
 
-const page = () => {
-  const bookedDays = [
-    new Date(2025, 0, 8),
-    new Date(2025, 0, 9),
-    new Date(2025, 0, 11),
-  ];
-  const grantedDays = [new Date(2025, 0, 26)];
-
+const Page = () => {
+  const [apiData, setApiData] = useState<ApiDataI>(defaultAPIData);
+  const dispatch = useDispatch();
+  const fetchAllApis = async () => {
+    dispatch(isLoader(true));
+    try {
+      const apiUrlArray = Object.entries(DashboardURL);
+      apiUrlArray.map(async (data) => {
+        try {
+          const respData = await ApiCall({
+            url: data[1],
+            method: "get",
+          });
+          if (respData.data.success) {
+            dispatch(isLoader(false));
+            setApiData((prev) => ({
+              ...prev,
+              [data[0]]: respData.data.data,
+            }));
+          } else {
+            throw new Error("Api failure");
+          }
+        } catch (error) {
+          throw error;
+        }
+      });
+    } catch (error) {
+      dispatch(isLoader(true));
+      showAlert({ type: "error", message: "Something went wrong", error });
+    }
+  };
+  useEffect(() => {
+    fetchAllApis();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div className="flex flex-wrap-reverse justify-evenly">
       <div className="flex-col w-[90%] lg:w-[45%]">
@@ -59,7 +79,8 @@ const page = () => {
         <MultiLineChart
           className="w-100 mb-4"
           title="Total Attendance"
-          description="Number of Employees and children present today"
+          description="Number of children present today w.r.t branches"
+          data={apiData.attendanceBranch}
         />
         {/* Different types of Employees  */}
         <CustomPieChart
@@ -68,14 +89,16 @@ const page = () => {
           description=""
           chartLabel="Employees"
           footerData="Total employees with respective to profession"
-          chartConfig={pieChartConfig}
-          chartData={pieChartData}
+          chartConfig={apiData.employees.chartConfig}
+          chartData={apiData.employees.chartData}
         />
         {/* admission status branch wise*/}
         <LeveledBarGraph
           className="w-100 mb-4"
           title="Total Number of Students"
           description="Number of students in respective branches"
+          data={apiData.totalStudents.chartData}
+          chartConfig={apiData.totalStudents.chartConfig}
         />
       </div>
       <div className="flex-col w-[90%] lg:w-[45%]">
@@ -87,8 +110,8 @@ const page = () => {
             <Calendar
               mode="single"
               modifiers={{
-                publicHolidays: bookedDays,
-                grantedHolidays: grantedDays,
+                publicHolidays: apiData.holdiays.mainHoliday,
+                grantedHolidays: apiData.holdiays.grantedDays,
               }}
               modifiersClassNames={{
                 publicHolidays: "public-calender",
@@ -109,10 +132,10 @@ const page = () => {
             </div>
           </CardContent>
         </Card>
-        <EventTabs className="w-100 mb-4 mt-4" />
+        <EventTabs className="w-100 mb-4 mt-4" data={apiData.events} />
       </div>
     </div>
   );
 };
 
-export default page;
+export default Page;

@@ -27,6 +27,7 @@ export const dbConnect = async () => {
     cached.conn = await cached.promise;
   } catch (error) {
     cached.promise = null;
+    console.log(error)
     throw error;
   }
   return cached.conn;

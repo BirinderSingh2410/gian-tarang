@@ -4,17 +4,17 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Separator } from "@/components/ui/separator";
 import {
-  CalendarDays,
-  Medal,
   Cake,
   Bell,
   Briefcase,
   HeartPulse,
+  CalendarDays,
+  Medal,
 } from "lucide-react";
 import { Avatar } from "@/components/ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { EventsData } from "@/types/charts";
+import { EventsData, RecentNotificationI } from "@/types/Dashboard/dashboard";
 import { ElementType } from "react";
 
 interface CardContents {
@@ -28,6 +28,14 @@ interface EventLablesInterface {
   title: string;
   description: string;
 }
+interface IconDataI {
+  [key: string]: ElementType;
+}
+const IconData: IconDataI = {
+  holiday: CalendarDays,
+  award: Medal,
+  user: Avatar,
+};
 
 function EventLabels({
   Logo = Avatar,
@@ -60,7 +68,7 @@ function CardContents({
     <Card>
       <CardHeader>
         <CardTitle className="flex">
-          <Icon className="mr-2"/>
+          <Icon className="mr-2" />
           {title}
         </CardTitle>
       </CardHeader>
@@ -69,7 +77,7 @@ function CardContents({
           {eventData.map((data: EventsData, index) => (
             <div key={index}>
               <EventLabels
-                Logo={data.eventIcon}
+                Logo={IconData[data.type]}
                 title={data?.title}
                 description={data.description}
               />
@@ -81,71 +89,11 @@ function CardContents({
     </Card>
   );
 }
-export function EventTabs({ className = "" }) {
-  const eventsData: Array<EventsData> = [
-    {
-      title: "This is the holiday title",
-      description: "This the description of it",
-      eventIcon: CalendarDays,
-    },
-    {
-      title: "This is the sport title",
-      description: "This is the for sport description",
-      eventIcon: Medal,
-    },
-  ];
-
-  const birthdayData: Array<EventsData> = [
-    {
-      title: "Employee Name 1",
-      description: "Designation",
-      eventIcon: Avatar,
-    },
-    {
-      title: "Employee Name 2",
-      description: "Designation",
-      eventIcon: Avatar,
-    },
-  ];
-  const workAnniversaryData: Array<EventsData> = [
-    {
-      title: "Employee Name 1",
-      description: "Designation",
-      eventIcon: Avatar,
-    },
-    {
-      title: "Employee Name 2",
-      description: "Designation",
-      eventIcon: Avatar,
-    },
-  ];
-  const leaveData: Array<EventsData> = [
-    {
-      title: "Employee Name 1",
-      description: "Designation",
-      eventIcon: Avatar,
-    },
-    {
-      title: "Employee Name 2",
-      description: "Designation",
-      eventIcon: Avatar,
-    },
-    {
-      title: "Employee Name 3",
-      description: "Designation",
-      eventIcon: Avatar,
-    },
-    {
-      title: "Employee Name 4",
-      description: "Designation",
-      eventIcon: Avatar,
-    },
-    {
-      title: "Employee Name 5",
-      description: "Designation",
-      eventIcon: Avatar,
-    },
-  ];
+interface EventPropsI {
+  className: string;
+  data: RecentNotificationI;
+}
+export function EventTabs({ className = "", data = {} }: EventPropsI) {
   return (
     <Tabs defaultValue="events" className={className}>
       <TabsList className="grid w-full grid-cols-4">
@@ -155,27 +103,31 @@ export function EventTabs({ className = "" }) {
         <TabsTrigger value="leave">{`Leave's`}</TabsTrigger>
       </TabsList>
       <TabsContent value="events">
-        <CardContents title="Events" Icon={Bell} eventData={eventsData || []} />
+        <CardContents
+          title="Events"
+          Icon={Bell}
+          eventData={data ? data["eventsData"] : []}
+        />
       </TabsContent>
       <TabsContent value="birthday" className="min-h-[220px]">
         <CardContents
           title="Birthday's Celebration"
           Icon={Cake}
-          eventData={birthdayData}
+          eventData={data ? data["birthdayData"] : []}
         />
       </TabsContent>
       <TabsContent value="work" className="min-h-[220px]">
         <CardContents
           title="Work Anniversay"
           Icon={Briefcase}
-          eventData={workAnniversaryData}
+          eventData={data ? data["workAnniversaryData"] : []}
         />
       </TabsContent>
       <TabsContent value="leave" className="min-h-[220px]">
         <CardContents
           title="People on Leave"
           Icon={HeartPulse}
-          eventData={leaveData}
+          eventData={data ? data["leaveData"] : []}
         />
       </TabsContent>
     </Tabs>
