@@ -54,7 +54,7 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="mt-[50px]">
-            <Link href="view/dashboard">
+            <Link href="/view/dashboard">
               <Image
                 src={Logo}
                 width={400}

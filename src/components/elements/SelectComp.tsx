@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 
 import {
   Select,
@@ -7,31 +7,37 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 
 interface SelectPropsInterface {
-    selectTitle: string,
-    values: string[],
-    selectedOption: string,
-    setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
+  selectTitle: string;
+  values: string[];
+  selectedOption: string;
+  setSelectedOption: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function SelectComp({selectTitle, values, selectedOption, setSelectedOption}:SelectPropsInterface) {
-  
+export function SelectComp({
+  selectTitle,
+  values,
+  selectedOption,
+  setSelectedOption,
+}: SelectPropsInterface) {
   return (
-    <Select onValueChange={setSelectedOption} value={selectedOption}>
+    <Select onValueChange={setSelectedOption} value={selectedOption} disabled={!values.length}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder={"Select a " + selectTitle} />
       </SelectTrigger>
       <SelectContent>
-        <SelectGroup>
-          {
-            values.map((data, index) => (
-                <SelectItem key={index} value={data}>{data}</SelectItem>
-            ))
-          }
-        </SelectGroup>
+        {values ? (
+          <SelectGroup>
+            {values.map((data, index) => (
+              <SelectItem key={index} value={data}>
+                {data}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        ) : null}
       </SelectContent>
     </Select>
-  )
+  );
 }
