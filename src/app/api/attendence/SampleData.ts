@@ -1,134 +1,175 @@
 import {
-  HolidaysI,
-  OverallAttendanceI,
-  RecentNotificationI,
-  PeopleCountI,
-} from "@/types/Dashboard/dashboard";
+  AttendanceTableInfoData,
+  AttendenceStats,
+  LiveAttendanceData,
+} from "@/types/attendence";
+import { AttendanceChartData } from "@/types/charts";
 
-export const attendanceData: Array<OverallAttendanceI> = [
-  { month: "January", branch1: 186, branch2: 80, branch3: 100 },
-  { month: "February", branch1: 305, branch2: 200, branch3: 120 },
-  { month: "March", branch1: 237, branch2: 120, branch3: 80 },
-  { month: "April", branch1: 73, branch2: 190, branch3: 70 },
-  { month: "May", branch1: 209, branch2: 130, branch3: 190 },
-  { month: "June", branch1: 214, branch2: 140, branch3: 100 },
+export const sampleAtendanceInfo: AttendanceTableInfoData[] = [
+  {
+    first: "P",
+    second: "P",
+    third: "A",
+    totalAbsent: 2,
+    totalPresent: 4,
+    name: "test1",
+  },
+  {
+    first: "P",
+    second: "P",
+    third: "A",
+    totalAbsent: 2,
+    totalPresent: 4,
+    name: "test1",
+  },
+  {
+    first: "P",
+    second: "P",
+    third: "A",
+    totalAbsent: 2,
+    totalPresent: 4,
+    name: "test1",
+  },
+  {
+    first: "P",
+    second: "P",
+    third: "A",
+    totalAbsent: 2,
+    totalPresent: 4,
+    name: "test1",
+  },
+  {
+    first: "P",
+    second: "P",
+    third: "A",
+    totalAbsent: 2,
+    totalPresent: 4,
+    name: "test1",
+  },
+  {
+    first: "P",
+    second: "P",
+    third: "A",
+    totalAbsent: 2,
+    totalPresent: 4,
+    name: "test1",
+  },
+  {
+    first: "P",
+    second: "P",
+    third: "A",
+    totalAbsent: 2,
+    totalPresent: 4,
+    name: "test1",
+  },
+  {
+    first: "P",
+    second: "P",
+    third: "A",
+    totalAbsent: 2,
+    totalPresent: 4,
+    name: "test1",
+  },
 ];
 
-export const employeesData: PeopleCountI = {
-  chartData: [
-    { label: "teachers", count: 275, fill: "var(--color-teachers)" },
-    { label: "assistants", count: 200, fill: "var(--color-assistants)" },
-    { label: "others", count: 287, fill: "var(--color-others)" },
-  ],
-  chartConfig: {
-    assistants: {
-      label: "Assistants",
-      color: "hsl(var(--chart-4))",
-    },
-    others: {
-      label: "Others",
-      color: "hsl(var(--chart-2))",
-    },
-    teachers: {
-      label: "Teachers",
-      color: "hsl(var(--chart-3))",
-    },
+export const classData: string[] = ["Class 1", "Class 3", "Class 6", "+2"];
+
+export const branchData: string[] = ["Branch 1", "Branch 2", "Branch 3"];
+
+export const sectionData: string[] = ["A", "B", "C"];
+
+export const chartData: AttendanceChartData[] = [
+  { day: "Monday", present: 186, absent: 80 },
+  { day: "Tuesday", present: 305, absent: 200 },
+  { day: "Wednesday", present: 237, absent: 120 },
+  { day: "Thursday", present: 73, absent: 190 },
+  { day: "Friday", present: 209, absent: 130 },
+  { day: "Saturday", present: 214, absent: 140 },
+];
+
+export const statusData: AttendenceStats = {
+  totalPresent: 20,
+  totalAbsent: 10,
+  overallRemarks: "Good",
+};
+
+export const attendanceData: LiveAttendanceData[] = [
+  {
+    name: "Birinder singh",
+    rollno: 1,
+    yesterday: "absent",
+    status: "",
   },
-};
-
-export const totalNumberOfStudents: PeopleCountI = {
-  chartConfig: {
-    branch1: {
-      label: "Branch 1",
-      color: "hsl(var(--chart-1))",
-    },
-    branch2: {
-      label: "Branch 2",
-      color: "hsl(var(--chart-2))",
-    },
-    branch3: {
-      label: "Branch 3",
-      color: "hsl(var(--chart-3))",
-    },
+  {
+    name: "Abc",
+    rollno: 2,
+    yesterday: "present",
+    status: "",
   },
-  chartData: [
-    { label: "branch1", count: 275, fill: "var(--color-branch1)" },
-    { label: "branch2", count: 200, fill: "var(--color-branch2)" },
-    { label: "branch3", count: 187, fill: "var(--color-branch3)" },
-  ],
-};
-
-export const holidays: HolidaysI = {
-  grantedDays: [new Date(2025, 0, 26)],
-  mainHoliday: [
-    new Date(2025, 6, 8),
-    new Date(2025, 0, 9),
-    new Date(2025, 0, 11),
-  ],
-};
-
-export const RecentEvents: RecentNotificationI = {
-  eventsData: [
-    {
-      title: "This is the holiday title",
-      description: "This the description of it",
-      type: 'holiday'
-    },
-    {
-      title: "This is the sport title",
-      description: "This is the for sport description",
-      type: 'award'
-    },
-  ],
-  birthdayData: [
-    {
-      title: "Employee Name 1",
-      description: "Designation",
-      type: 'user'
-    },
-    {
-      title: "Employee Name 2",
-      description: "Designation",
-      type: 'user'
-    },
-  ],
-  workAnniversaryData: [
-    {
-      title: "Employee Name 1",
-      description: "Designation",
-      type: 'user'
-    },
-    {
-      title: "Employee Name 2",
-      description: "Designation",
-      type: 'user'
-    },
-  ],
-  leaveData: [
-    {
-      title: "Employee Name 1",
-      description: "Designation",
-      type: 'user'
-    },
-    {
-      title: "Employee Name 2",
-      description: "Designation",
-      type: 'user'
-    },
-    {
-      title: "Employee Name 3",
-      description: "Designation",
-      type: 'user'
-    },
-    {
-      title: "Employee Name 4",
-      description: "Designation",
-      type: 'user'
-    },
-    {
-      title: "Employee Name 5",
-      description: "Designation",
-      type: 'user'
-    },
-  ],
-};
+  {
+    name: "test1",
+    rollno: 3,
+    yesterday: "present",
+    status: "",
+  },
+  {
+    name: "test2",
+    rollno: 4,
+    yesterday: "leave",
+    status: "",
+  },
+  {
+    name: "test3",
+    rollno: 5,
+    yesterday: "absent",
+    status: "",
+  },
+  {
+    name: "test4",
+    rollno: 6,
+    yesterday: "present",
+    status: "",
+  },
+  {
+    name: "test5",
+    rollno: 7,
+    yesterday: "absent",
+    status: "",
+  },
+  {
+    name: "test6",
+    rollno: 8,
+    yesterday: "absent",
+    status: "",
+  },
+  {
+    name: "test7",
+    rollno: 9,
+    yesterday: "present",
+    status: "",
+  },
+  {
+    name: "test8",
+    rollno: 10,
+    yesterday: "absent",
+    status: "",
+  },
+  {
+    name: "test9",
+    rollno: 11,
+    yesterday: "leave",
+    status: "",
+  },
+  {
+    name: "test10",
+    rollno: 12,
+    yesterday: "absent",
+    status: "",
+  },
+  {
+    name: "test11",
+    rollno: 13,
+    yesterday: "present",
+    status: "",
+  },
+];

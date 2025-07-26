@@ -15,7 +15,7 @@ import {
   OverallAttendanceI,
   PeopleCountI,
   RecentNotificationI,
-} from "@/types/Dashboard/dashboard";
+} from "@/types/dashboard";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -50,11 +50,11 @@ const Page = () => {
             url: data[1],
             method: "get",
           });
-          if (respData.data.success) {
+          if (respData.success) {
             dispatch(isLoader(false));
             setApiData((prev) => ({
               ...prev,
-              [data[0]]: respData.data.data,
+              [data[0]]: respData.data,
             }));
           } else {
             throw new Error("Api failure");
@@ -70,7 +70,7 @@ const Page = () => {
   };
   useEffect(() => {
     fetchAllApis();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="flex flex-wrap-reverse justify-evenly">

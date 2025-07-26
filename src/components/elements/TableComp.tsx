@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { TableHeaders } from "@/types/Attendance/dto";
+import { TableHeaders } from "@/types/attendence";
 import { ElementType } from "react";
 import { Button } from "@/components/ui/button";
 // import { PaginationComp } from "./PaginationComp";

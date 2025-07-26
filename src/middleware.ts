@@ -26,4 +26,4 @@ export default withAuth(
   }
 );
 
-export const config = { matcher: ["/view/:path*", "/api/attendence/:path*"] };
+export const config = { matcher: ["/view/:path*", "/api/:path*"] };
